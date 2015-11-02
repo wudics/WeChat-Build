@@ -1,5 +1,6 @@
 <?php
 
+	// 路由函数，通过url找到指定应用并执行
 	function callHook()
 	{
 		global $url;
@@ -45,4 +46,5 @@
 		}
 	}
 	
+	// 启动路由
 	callHook();
