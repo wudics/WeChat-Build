@@ -1,0 +1,161 @@
+基础支持: 获取access_token接口 /token
+请求地址：
+https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx2aaae40788f72d75&secret=d4624c36b6795d1d99dcf0547af5443d 
+
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 08:47:24 GMT
+Server: nginx/1.8.0
+Content-Type: application/json; encoding=utf-8
+Content-Length: 154
+{
+    "access_token": "4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ", 
+    "expires_in": 7200
+}
+提示:
+Request successful
+
+=====================================================================
+
+基础支持: 多媒体文件上传接口 /media/upload
+请求地址：
+http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ&type=image
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 08:48:49 GMT
+Content-Type: text/plain
+Content-Length: 118
+{
+    "type": "image", 
+    "media_id": "Fd-BbQUg0jnSHymaR1Rid593tps_8PfAYT276ZV4_ytDhlLh4cxk64hBRsEq-TZ9", 
+    "created_at": 1446540529
+}
+提示:
+Request successful
+
+=====================================================================
+
+下载多媒体文件接口 /media/get
+请求地址：
+http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ&media_id=Fd-BbQUg0jnSHymaR1Rid593tps_8PfAYT276ZV4_ytDhlLh4cxk64hBRsEq-TZ9
+返回结果:
+200	OK
+Cache-Control: no-cache, must-revalidate
+Connection: close
+Date: Tue, 03 Nov 2015 08:55:28 GMT
+Content-Type: image/jpeg
+Content-Length: 7256
+Content-disposition: attachment; filename="Fd-BbQUg0jnSHymaR1Rid593tps_8PfAYT276ZV4_ytDhlLh4cxk64hBRsEq-TZ9.jpg"
+
+提示:
+Request successful
+
+=====================================================================
+
+基础支持: 上传logo接口 /media/uploadimg
+请求地址：
+http://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ&type=image
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 09:03:27 GMT
+Server: nginx/1.8.0
+Content-Type: text/plain
+Content-Length: 134
+{
+    "url": "http://mmbiz.qpic.cn/mmbiz/0sj2x2zymeX41vPfZ4iaWtJXTvM7xP44gR7QFAzvZNHrZfaUYTib4GHGfvgwqkCopibtyFwT57wCjC8ialh4R8mVWg/0"
+}
+提示:
+Request successful
+
+=====================================================================
+
+用户管理: 获取关注者列表接口 /user/get
+请求地址：
+https://api.weixin.qq.com/cgi-bin/user/get?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ&next_openid=
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 09:04:46 GMT
+Server: nginx/1.8.0
+Content-Type: application/json; encoding=utf-8
+Content-Length: 148
+{
+    "total": 2, 
+    "count": 2, 
+    "data": {
+        "openid": [
+            "oMd1owLL8tHgciN1HxLRRKSA68eI", 
+            "oMd1owBiuupZ4BPmGHysNggThxt0"
+        ]
+    }, 
+    "next_openid": "oMd1owBiuupZ4BPmGHysNggThxt0"
+}
+提示:
+Request successful
+
+=====================================================================
+
+用户管理: 获取用户基本信息接口 /user/info
+请求地址：
+https://api.weixin.qq.com/cgi-bin/user/info?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ&openid=oMd1owLL8tHgciN1HxLRRKSA68eI
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 09:06:40 GMT
+Server: nginx/1.8.0
+Content-Type: application/json; encoding=utf-8
+Content-Length: 402
+{
+    "subscribe": 1, 
+    "openid": "oMd1owLL8tHgciN1HxLRRKSA68eI", 
+    "nickname": "wudics", 
+    "sex": 1, 
+    "language": "zh_CN", 
+    "city": "桂林", 
+    "province": "广西", 
+    "country": "中国", 
+    "headimgurl": "http://wx.qlogo.cn/mmopen/WVbZLt2iaHRL7ibkobklvpZq0UWRiamRsDtxQticpNYYnsYUSepK3ble3PPVjBdwdiaXfFtaTVJiaYmk7w24E6VqyWYuPD9jYsF9icr/0", 
+    "subscribe_time": 1446361241, 
+    "unionid": "oujvTvrHlg9EUzUjdiw-H2yz3lMg", 
+    "remark": "", 
+    "groupid": 0
+}
+提示:
+Request successful
+
+=====================================================================
+
+用户管理: 查询分组接口 /groups/get
+请求地址：
+https://api.weixin.qq.com/cgi-bin/groups/get?access_token=4CIrrLO6mY9ooWguHjcdRMUlwuzZUtAcddXcvz6uGZqP7rpBYBkrvTjpHV0u-7ZglUpraYb_rtkVGuEXSQxI-rYP0LKWheSF-_zn9p1ucrMHXOfAGASIZ
+返回结果:
+200	OK
+Connection: keep-alive
+Date: Tue, 03 Nov 2015 09:07:11 GMT
+Server: nginx/1.8.0
+Content-Type: application/json; encoding=utf-8
+Content-Length: 126
+{
+    "groups": [
+        {
+            "id": 0, 
+            "name": "未分组", 
+            "count": 2
+        }, 
+        {
+            "id": 1, 
+            "name": "黑名单", 
+            "count": 0
+        }, 
+        {
+            "id": 2, 
+            "name": "星标组", 
+            "count": 0
+        }
+    ]
+}
+
+=====================================================================
