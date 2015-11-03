@@ -49,25 +49,33 @@ class Wechat
 		$this->mapping["event"] = "eventhandler";
 	}
 	
-	// 设置token
+	/*
+	 * 设置token
+	 */
 	public function setToken($token)
 	{
 		$this->token = $token;
 	}
 	
-	// 设置appid
+	/*
+	 * 设置appid
+	 */
 	public function setAppid($appid)
 	{
 		$this->appid = $appid;
 	}
 	
-	// 设置appsecret
+	/*
+	 * 设置appsecret
+	 */
 	public function setAppsecret($appsecret)
 	{
 		$this->appsecret = $appsecret;
 	}
 
-	// 设置mapping
+	/*
+	 * 设置mapping
+	 */
 	public function setMapping($mapping)
 	{
 		$this->mapping = $mapping;
@@ -87,7 +95,9 @@ class Wechat
 		}
 	}
 	
-	// 回应校验信息
+	/*
+	 * 回应校验信息
+	 */
 	private function valid()
 	{
 		$echoStr = $_GET["echostr"];
@@ -100,7 +110,9 @@ class Wechat
 		}
 	}
 	
-	// 校验算法
+	/*
+	 * 校验算法
+	 */
 	private function checkSignature()
 	{
 		if ($this->token == null)
@@ -131,7 +143,9 @@ class Wechat
 		}
 	}
 	
-	// 消息处理以及回应
+	/*
+	 * 消息处理以及回应
+	 */
 	private function responseMsg()
 	{
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -154,7 +168,10 @@ class Wechat
         }
 	}
 	
-	// 消息分发
+	/*
+	 * 消息分发
+	 * 参数：用户openId、公众号Id、消息类型、消息创建时间、数据实体
+	 */
 	private function dispatchMsg($openId, $ownerId, $msgType, $time, $postObj)
 	{
 		// 通过MsgType的消息类型，选择相应的映射函数处理
@@ -201,7 +218,167 @@ class Wechat
 	}
 	
 	
+	/*
+	 * 获取被动回复xml内容，类型text
+	 * 参数：用户openId、公众号Id、消息创建时间、回复内容
+	 */
+	public static function getRspText($openId, $ownerId, $createat, $rspcontent)
+	{  	
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[text]]></MsgType>
+				<Content><![CDATA[%s]]></Content>
+				</xml>";
+				
+		return sprintf($tpl, $openId, $ownerId, $createat, $rspcontent);
+	}
 	
+	/*
+	 * 获取被动回复xml内容，类型image
+	 * 参数：用户openId、公众号Id、消息创建时间、图片媒体Id
+	 */
+	public static function getRspImage($openId, $ownerId, $createat, $mediaId)
+	{
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[image]]></MsgType>
+				<Image>
+				<MediaId><![CDATA[%s]]></MediaId>
+				</Image>
+				</xml>";
+		return sprintf($tpl, $openId, $ownerId, $createat, $mediaId);
+	}
 	
+	/*
+	 * 获取被动回复xml内容，类型voice
+	 * 参数：用户openId、公众号Id、消息创建时间、语音媒体Id
+	 */
+	public static function getRspVoice($openId, $ownerId, $createat, $mediaId)
+	{
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[voice]]></MsgType>
+				<Voice>
+				<MediaId><![CDATA[%s]]></MediaId>
+				</Voice>
+				</xml>";
+		return sprintf($tpl, $openId, $ownerId, $createat, $mediaId);
+	}
 	
+	/*
+	 * 获取被动回复xml内容，类型video
+	 * 参数：用户openId、公众号Id、消息创建时间、视频媒体Id、视频标题、视频描述
+	 */
+	public static function getRspVideo($openId, $ownerId, $createat, $mediaId, $title, $desc)
+	{
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[video]]></MsgType>
+				<Video>
+				<MediaId><![CDATA[%s]]></MediaId>
+				<Title><![CDATA[%s]]></Title>
+				<Description><![CDATA[%s]]></Description>
+				</Video> 
+				</xml>";
+		return sprintf($tpl, $openId, $ownerId, $createat, $mediaId, $title, $desc);
+	}
+	
+	/*
+	 * 获取被动回复xml内容，类型music
+	 * 参数：用户openId、公众号Id、消息创建时间、标题、描述、音乐url、高清音乐url、缩略图Id
+	 */
+	public static function getRspMusic($openId, $ownerId, $createat, $title, $desc, $musicUrl, $hdMusicUrl, $thumbId)
+	{
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[music]]></MsgType>
+				<Music>
+				<Title><![CDATA[%s]]></Title>
+				<Description><![CDATA[%s]]></Description>
+				<MusicUrl><![CDATA[%s]]></MusicUrl>
+				<HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+				<ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
+				</Music>
+				</xml>";
+		return sprintf($tpl, $openId, $ownerId, $createat, $title, $desc, $musicUrl, $hdMusicUrl, $thumbId);
+	}
+	
+	/*
+	 * 获取被动回复xml内容，类型news
+	 * 参数：用户openId、公众号Id、消息创建时间、图文条目
+	 * 说明：$items = array();
+	 *       	$item = array();
+	 *			$item["title"] = "Title";
+	 *			$item["desc"] = "Description";
+	 *			$item["picUrl"] = "http://wudics.8800.org/logo.png";
+	 *			$item["url"] = "http://wudics.8800.org";
+	 *		 $items[] = $item;
+	 */
+	public static function getRspNews($openId, $ownerId, $createat, $items)
+	{
+		// <xml>
+		// <ToUserName><![CDATA[toUser]]></ToUserName>
+		// <FromUserName><![CDATA[fromUser]]></FromUserName>
+		// <CreateTime>12345678</CreateTime>
+		// <MsgType><![CDATA[news]]></MsgType>
+		// <ArticleCount>2</ArticleCount>
+		// <Articles>
+		// <item>
+		// <Title><![CDATA[title1]]></Title> 
+		// <Description><![CDATA[description1]]></Description>
+		// <PicUrl><![CDATA[picurl]]></PicUrl>
+		// <Url><![CDATA[url]]></Url>
+		// </item>
+		// <item>
+		// <Title><![CDATA[title]]></Title>
+		// <Description><![CDATA[description]]></Description>
+		// <PicUrl><![CDATA[picurl]]></PicUrl>
+		// <Url><![CDATA[url]]></Url>
+		// </item>
+		// </Articles>
+		// </xml>
+		$articlecount = count($items);
+		if ($articlecount == 0)
+		{
+			return "";
+		}
+		
+		// 模板
+		$tpl = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[news]]></MsgType>
+				<ArticleCount>%s</ArticleCount>
+				<Articles>
+				%s
+				</Articles>
+				</xml>";
+		
+		// item模板
+		$tpl_item = "<item>
+					 <Title><![CDATA[%s]]></Title> 
+					 <Description><![CDATA[%s]]></Description>
+					 <PicUrl><![CDATA[%s]]></PicUrl>
+					 <Url><![CDATA[%s]]></Url>
+					 </item>";
+		
+		$itemStr = "";
+		for ($i = 0; $i < $articlecount; $i++)
+		{
+			$itemStr .= sprintf($tpl_item, $items[$i]["title"], $items[$i]["desc"], $items[$i]["picUrl"], $items[$i]["url"]);
+		}
+		
+		return sprintf($tpl, $openId, $ownerId, $createat, $articlecount, $itemStr);
+	}
 }

@@ -2,7 +2,7 @@
 
 	/*
 		单一入口，根据appname加载不同应用
-		?url=[appname]/[param1]/[params2]/[params3]
+		?url=[appname]/[param1]/[params2]
 		?url=pub01/wudics/7758258
 	*/
 	
